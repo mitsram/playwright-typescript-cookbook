@@ -1,0 +1,23 @@
+{
+  "name": "playwright-typescript-cookbook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mitsram/playwright-typescript-cookbook.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mitsram/playwright-typescript-cookbook/issues"
+  },
+  "homepage": "https://github.com/mitsram/playwright-typescript-cookbook#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.39.0",
+    "@types/node": "^20.8.9",
+    "dotenv": "^16.3.1"
+  }
+}
