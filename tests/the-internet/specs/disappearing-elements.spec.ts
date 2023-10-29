@@ -1,14 +1,6 @@
-import { Locator } from '@playwright/test';
 import { test, expect  } from './base-test';
 import _ from 'lodash';
-
-async function locatorsToStrings(arrayLocators: Locator[]) {
-    const arr: string[] = [];
-    for (const locator of arrayLocators) {
-        arr.push(await locator.innerText());
-    }
-    return arr;
-}
+import { locatorsToStrings } from '../support/utils';
 
 test.describe('Disappearing Elements', () => {
     
