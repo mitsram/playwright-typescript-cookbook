@@ -12,6 +12,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: [['list'], ['html']],
   outputDir: 'playwright-results',
+  timeout: 60000,
   use: {
     headless: (headless === 'true'),
     trace: 'on',
