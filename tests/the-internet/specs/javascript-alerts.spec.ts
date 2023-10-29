@@ -28,7 +28,7 @@ test.describe('Javascript Alerts', () => {
         expect(result).toEqual('You clicked: Ok');
     });
 
-    test('return cancel when confirmed is dismissed', async ({ page }) => {
+    test('return cancel when confirmation is dismissed', async ({ page }) => {
         page.on('dialog', async (dialog) => {
             expect(dialog.message()).toContain('I am a JS Confirm');
             await dialog.dismiss();
