@@ -2,21 +2,34 @@ import { defineConfig, devices } from '@playwright/test';
 import dotnev from 'dotenv';
 dotnev.config();
 
+const env = process.env.APP_ENVIRONMENT;
 const headless = process.env.HEADLESS || 'true';
+const baseUrl = env ? `https:${env}.saucedemo.com//` : 'https://saucedemo.com';
 
 export default defineConfig({
   testDir: './tests',
+  timeout: 60 * 1000,
+  expect: {
+    timeout: 25000
+  },
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
-  reporter: [['list'], ['html']],
-  outputDir: 'playwright-results',
-  timeout: 60000,
+  workers: process.env.CI ? 1 : undefined,  
   use: {
+    baseURL: baseUrl,
     headless: (headless === 'true'),
     trace: 'on',
+    ignoreHTTPSErrors: true,
+    actionTimeout: 0,
+    viewport: { height: 1080, width: 1920},
+    screenshot: 'only-on-failure'
   },
+  outputDir: 'playwright-results',  
+  reporter: [
+    ['list'], 
+    ['html']
+  ],
 
   /* Configure projects for major browsers */
   projects: [
@@ -24,6 +37,22 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
+    {
+      name: 'saucedemo',
+      testDir: './tests/saucedemo/specs',
+      use: {
+        baseURL: 'https://www.saucedemo.com/'
+      },
+      outputDir: './test-results/saucedemo/'
+    },
+    {
+      name: 'petstore',
+      testDir: './tests/petstore-api/specs',
+      use: {
+        baseURL: 'petstore.swagger.io/v2'
+      },
+      outputDir: './test-results/petstore/'
+    }
 
     // {
     //   name: 'firefox',
